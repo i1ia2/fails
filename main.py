@@ -1,24 +1,7 @@
 import os.path
 import pprint
-# def vse_menu(files:str) -> dict:
-#     with open('spisok.txt', encoding="utf-8") as f:
-#         ingredienti = {}
-#         for fail in f:
-#             lines = fail.strip()
-#             ingredienti[lines] = []
-#             for menu in range(int(f.readline())):
-#
-#                 razdelenie = f.readline().split(' | ')
-#                 ingredienti[lines].append({'ingredient_name': razdelenie[0],
-#                                            'quantity': int(razdelenie[1]),
-#                                            'measure': razdelenie[2].strip()})
-#
-#             f.readline()
-#     return ingredienti
-#
-# print(vse_menu(dict))
 
-def vse_menu(files:str) -> dict:
+def vse_menu():
     cook_dikt = {}
     with open('spisok.txt', encoding="utf-8") as f:
         for line in f:
@@ -27,26 +10,49 @@ def vse_menu(files:str) -> dict:
             list_of_ingrigient = []
             for i in range(int(counter)):
                 ingridient = f.readline().split(' | ')
-                list_of_ingrigient = ({'ingredient_name': ingridient[0],
-                                'quantity': ingridient[1],
+                list_ingrigient = ({'ingredient_name': ingridient[0],
+                                'quantity': int(ingridient[1]),
                                 'measure': ingridient[2]})
+
+                list_of_ingrigient.append(list_ingrigient)
+
             cook_dikt[dish_name] = list_of_ingrigient
             f.readline()
         return cook_dikt
 
+# pprint.pp(vse_menu())
 
-def list_gosti(dishen: list, person: int, cook_book: dict) -> dict:
+def list_gosti(dish_name, person_count) -> dict:
+    cook_book = vse_menu()
     result = {}
-    for dish in dishen:
-        if dish in cook_book:
+    for dish in dish_name:
+        if dish in cook_book.keys():
             for consist in cook_book[dish]:
                 if consist['ingredient_name'] in result:
-                    result[consist['ingredient_name']]['quantity'] += consist['quantity'] * person
+                    result[consist['ingredient_name']]['quantity'] += consist['quantity'] * person_count
                 else:
                     result[consist['ingredient_name']] = {'measure': consist['measure'],
-                                                       'quantity': (consist['quantity'] * person)}
+                                                       'quantity': (consist['quantity'] * person_count)}
         else:
             print(f'этого блюда {dish}, нет в книге рецептов')
     return result
-print(list_gosti(dict))
+
+# pprint.pp(list_gosti(['Омлет', 'Утка по-пекински'], 7))
+
+# def texts():
+#     TEXTS = '1'
+#     full_path_to_texts = os.path.join(os.getcwd(), TEXTS)
+#     texts_list = os.listdir(full_path_to_texts)
+#     all_texts = {}
+#     for file in texts_list:
+#         file_path = os.path.join(full_path_to_texts, file)
+#         with open(1, 'r', encoding = 'utf-8') as file_to_read:
+#             list_of_strings = []
+#             for line in file_to_read:
+#                 list_of_strings.append(line.strip())
+#             text = '\n'.join(list_of_strings)
+#         all_texts[len(list_of_strings)] = {'name': file, 'length': str(len(list_of_strings)), 'text': text}
+#     return all_texts
+#
+# print(texts())
 
