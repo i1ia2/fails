@@ -20,7 +20,6 @@ def vse_menu():
             f.readline()
         return cook_dikt
 
-# pprint.pp(vse_menu())
 
 def list_gosti(dish_name, person_count) -> dict:
     cook_book = vse_menu()
@@ -39,20 +38,23 @@ def list_gosti(dish_name, person_count) -> dict:
 
 # pprint.pp(list_gosti(['Омлет', 'Утка по-пекински'], 7))
 
-# def texts():
-#     TEXTS = '1'
-#     full_path_to_texts = os.path.join(os.getcwd(), TEXTS)
-#     texts_list = os.listdir(full_path_to_texts)
-#     all_texts = {}
-#     for file in texts_list:
-#         file_path = os.path.join(full_path_to_texts, file)
-#         with open(1, 'r', encoding = 'utf-8') as file_to_read:
-#             list_of_strings = []
-#             for line in file_to_read:
-#                 list_of_strings.append(line.strip())
-#             text = '\n'.join(list_of_strings)
-#         all_texts[len(list_of_strings)] = {'name': file, 'length': str(len(list_of_strings)), 'text': text}
-#     return all_texts
-#
-# print(texts())
+def texts():
+    TEXTS = 'failsss'
+    full_path_to_texts = os.path.join(os.getcwd(), TEXTS)
+    texts_list = os.listdir(full_path_to_texts)
+    all_texts = {}
+    for file in texts_list:
+        file_path = os.path.join(full_path_to_texts, file)
+        with open(file_path, 'r', encoding = 'utf-8') as file_to_read:
+            list_of_strings = []
+            for line in file_to_read:
+                list_of_strings.append(line.strip())
+            text = '\n'.join(list_of_strings)
+        all_texts[len(list_of_strings)] = {'name': file, 'length': str(len(list_of_strings)), 'text': text}
+    for all in sorted(all_texts):
+        sorted_all = all_texts.get(all)
+        pprint.pp(sorted_all)
+    return
 
+if __name__ == '__main__':
+    texts()
